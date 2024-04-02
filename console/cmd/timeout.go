@@ -10,7 +10,7 @@ func Timeout(animation []string, timeout time.Duration, a ...any) {
 	for {
 		elapsed := time.Since(start)
 		if elapsed >= timeout {
-			fmt.Println("\n")
+			fmt.Println()
 			return
 		}
 		for _, frame := range animation {
