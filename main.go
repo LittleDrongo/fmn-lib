@@ -20,7 +20,10 @@ import (
 
 func main() {
 
-	cmd.Timeout(loading.BAR, 5*time.Second, color.BG_BLUE, "Автозапуск:", color.BG_RESET) // Пример с таймаутом 3 секунды
+	// cmd.Input("Нажми: ")
+	cmd.Timeout(loading.CUBES, 1*time.Second, color.BG_RED, "Автозапуск:", color.BG_RESET)
+	cmd.Timeout(loading.BAR, 1*time.Second, color.BG_RED, "Автозапуск:", color.BG_RESET)
+
 	cmd.Waiting(animation.DOTS, "Ожидание: ")
 
 	pass := cmd.Input("dasd: ")
