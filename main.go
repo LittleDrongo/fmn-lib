@@ -5,11 +5,11 @@ import (
 	"log"
 	"os"
 
-	"github.com/LittleDrongo/go_libs/planner"
+	"github.com/LittleDrongo/fmn-lib/planner"
 
-	"github.com/LittleDrongo/go_libs/errors"
+	"github.com/LittleDrongo/fmn-lib/errors"
 
-	"github.com/LittleDrongo/go_libs/console/color"
+	"github.com/LittleDrongo/fmn-lib/console/color"
 
 	"gopkg.in/mail.v2"
 )
@@ -66,9 +66,5 @@ func main() {
 	},
 		"Тестовый метод2")
 
-	// cron.Start()
 	cron.Run()
-	// cmd.Waiting(animation.SPIN, color.GREEN, "Планировщик запущен", color.RESET)
-	fmt.Println()
-	select {}
 }

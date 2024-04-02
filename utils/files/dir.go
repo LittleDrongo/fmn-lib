@@ -4,7 +4,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/LittleDrongo/go_libs/errors"
+	"github.com/LittleDrongo/fmn-lib/errors"
 )
 
 func MakeDirIfIsNotExist(path string) {

@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/LittleDrongo/go_libs/utils/files"
+	"github.com/LittleDrongo/fmn-lib/utils/files"
 
-	"github.com/LittleDrongo/go_libs/errors"
+	"github.com/LittleDrongo/fmn-lib/errors"
 )
 
 type Writer interface {

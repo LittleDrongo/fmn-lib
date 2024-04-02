@@ -3,11 +3,11 @@ package planner
 import (
 	"fmt"
 
-	"github.com/LittleDrongo/go_libs/console/cmd/animation"
+	"github.com/LittleDrongo/fmn-lib/console/cmd/animation"
 
-	"github.com/LittleDrongo/go_libs/console/color"
+	"github.com/LittleDrongo/fmn-lib/console/color"
 
-	"github.com/LittleDrongo/go_libs/console/cmd"
+	"github.com/LittleDrongo/fmn-lib/console/cmd"
 
 	"github.com/robfig/cron"
 )
