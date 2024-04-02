@@ -9,6 +9,7 @@ import (
 
 	"github.com/LittleDrongo/fmn-lib/errors"
 
+	"github.com/LittleDrongo/fmn-lib/console/cmd"
 	"github.com/LittleDrongo/fmn-lib/console/color"
 
 	"gopkg.in/mail.v2"
@@ -18,6 +19,10 @@ func main() {
 
 	// auth := smtp.Auth{}
 	//
+
+	pass := cmd.Input("dasd: ")
+	fmt.Println(color.BG_RED, color.YELLO, pass, color.BG_RESET, color.RESET)
+	fmt.Println(pass)
 
 	setting := mail.Dialer{
 		Host:     "",

@@ -1,13 +1,17 @@
 package cmd
 
 import (
+	"bufio"
 	"fmt"
+	"os"
+	"strings"
 )
 
-func Input(str string) string {
+type any = interface{}
 
-	var result string
-	fmt.Print(str)
-	fmt.Scanf("%s\n", &result)
-	return result
+func Input(a ...any) string {
+	fmt.Print(a...)
+	reader := bufio.NewReader(os.Stdin)
+	input, _ := reader.ReadString('\n')
+	return strings.TrimSpace(input)
 }
