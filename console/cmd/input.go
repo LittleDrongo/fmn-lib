@@ -4,12 +4,10 @@ import (
 	"fmt"
 )
 
-type any = interface{}
-
-func Input(a any) string {
+func Input(str string) string {
 
 	var result string
-	fmt.Print(a)
+	fmt.Print(str)
 	fmt.Scanf("%s\n", &result)
 	return result
 }
