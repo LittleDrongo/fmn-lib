@@ -30,5 +30,3 @@ const (
 	NBLINK     = "\033[5m"
 	INVERSE    = "\033[7m"
 )
-
-// fmt.Print(color.BG_RED, " ./r ", color.RESET, color.BG_BLACK, " Autoreporter", color.DBOLD, " v.10.3 ", color.RESET)
