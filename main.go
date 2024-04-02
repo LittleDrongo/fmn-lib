@@ -4,12 +4,15 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"time"
 
 	"github.com/LittleDrongo/fmn-lib/planner"
 
 	"github.com/LittleDrongo/fmn-lib/errors"
 
 	"github.com/LittleDrongo/fmn-lib/console/cmd"
+	"github.com/LittleDrongo/fmn-lib/console/cmd/animation"
+	"github.com/LittleDrongo/fmn-lib/console/cmd/loading"
 	"github.com/LittleDrongo/fmn-lib/console/color"
 
 	"gopkg.in/mail.v2"
@@ -17,8 +20,8 @@ import (
 
 func main() {
 
-	// auth := smtp.Auth{}
-	//
+	cmd.Timeout(loading.BAR, 5*time.Second, color.BG_BLUE, "Автозапуск:", color.BG_RESET) // Пример с таймаутом 3 секунды
+	cmd.Waiting(animation.DOTS, "Ожидание: ")
 
 	pass := cmd.Input("dasd: ")
 	fmt.Println(color.BG_RED, color.YELLO, pass, color.BG_RESET, color.RESET)
