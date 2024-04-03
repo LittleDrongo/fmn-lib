@@ -39,6 +39,6 @@ func (crn *TaskList) Run() {
 
 	crn.Start()
 	fmt.Println()
-	cmd.Waiting(animation.SPIN, color.GREEN, "Планировщик запущен", color.RESET)
+	cmd.Waiting(animation.DOTS, color.BG_GREEN, "Планировщик в режиме ожидания", color.BG_RESET)
 
 }
