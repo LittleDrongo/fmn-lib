@@ -14,6 +14,10 @@ import (
 
 func main() {
 
+	res := cmd.Password("Password please: ")
+	fmt.Println(res)
+	fmt.Println()
+
 	cmd.Timeout(loading.BAR, 1*time.Second, color.BG_RED, "Автозапуск:", color.BG_RESET)
 
 	fmt.Println()
