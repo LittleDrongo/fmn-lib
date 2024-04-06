@@ -5,7 +5,7 @@ import (
 	"time"
 )
 
-func Timeout(animation []string, timeout time.Duration, a ...any) {
+func Timeout(loading []string, timeout time.Duration, message ...any) {
 	start := time.Now()
 	for {
 		elapsed := time.Since(start)
@@ -13,9 +13,25 @@ func Timeout(animation []string, timeout time.Duration, a ...any) {
 			fmt.Println()
 			return
 		}
-		for _, frame := range animation {
-			fmt.Printf("\r%s %s", a, frame)
-			time.Sleep(timeout / time.Duration(len(animation)))
+		for _, frame := range loading {
+			fmt.Printf("\r%s %s", message, frame)
+			time.Sleep(timeout / time.Duration(len(loading)))
+		}
+	}
+}
+
+func TimeoutRun(loading []string, timeout time.Duration, code func(), message ...any) {
+	start := time.Now()
+	for {
+		elapsed := time.Since(start)
+		if elapsed >= timeout {
+			fmt.Println()
+			code()
+			return
+		}
+		for _, frame := range loading {
+			fmt.Printf("\r%s %s", message, frame)
+			time.Sleep(timeout / time.Duration(len(loading)))
 		}
 	}
 }
