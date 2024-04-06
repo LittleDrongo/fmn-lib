@@ -18,12 +18,16 @@ func main() {
 	fmt.Println(res)
 	fmt.Println()
 
-	cmd.Timeout(loading.BAR, 1*time.Second, color.BG_RED, "Автозапуск:", color.BG_RESET)
+	cmd.TimeoutRun(loading.BAR, 1*time.Second, func() {
+		someCronLogin()
+	}, color.BG_RED, "Автозапуск:", color.BG_RESET)
+}
+
+func someCronLogin() {
 
 	fmt.Println()
 	fmt.Print(color.BG_RED, " </> ", color.RESET, color.BG_BLACK, " Тестовое приложение", color.DBOLD, " v.0.0 ", color.RESET)
 	fmt.Println()
-
 	cron := planner.CreateNewTasklist()
 
 	cron.AddTaskCron(planner.CronRunArguments{
@@ -57,5 +61,5 @@ func main() {
 		"Тестовый метод2")
 
 	cron.Run()
-	// cmd.Waiting(animation.DOTS, "Ожидание: ")
+
 }
