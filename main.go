@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"log"
-	"time"
 
 	"github.com/LittleDrongo/fmn-lib/planner"
 
@@ -18,7 +17,7 @@ func main() {
 	fmt.Println(res)
 	fmt.Println()
 
-	cmd.TimeoutRun(loading.BAR, 1*time.Second, func() {
+	cmd.TimeoutRun(loading.BAR, 1, func() {
 		someCronLogin()
 	}, color.BG_RED, "Автозапуск:", color.BG_RESET)
 }

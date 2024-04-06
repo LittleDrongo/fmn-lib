@@ -5,7 +5,10 @@ import (
 	"time"
 )
 
-func Timeout(loading []string, timeout time.Duration, message ...any) {
+func Timeout(loading []string, second int, message ...any) {
+
+	timeout := time.Duration(second) * time.Second
+
 	start := time.Now()
 	for {
 		elapsed := time.Since(start)
@@ -20,7 +23,10 @@ func Timeout(loading []string, timeout time.Duration, message ...any) {
 	}
 }
 
-func TimeoutRun(loading []string, timeout time.Duration, code func(), message ...any) {
+func TimeoutRun(loading []string, second int, code func(), message ...any) {
+
+	timeout := time.Duration(second) * time.Second
+
 	start := time.Now()
 	for {
 		elapsed := time.Since(start)
