@@ -35,10 +35,10 @@ func (crn *TaskList) AddTaskCron(args CronRunArguments, code func(), description
 }
 
 /*Запуск выполнение кода с анимацией ожидания*/
-func (crn *TaskList) Run() {
+func (crn *TaskList) Run(msg string) {
 
 	crn.Start()
 	fmt.Println()
-	cmd.Waiting(animation.DOTS, color.BG_GREEN, "Планировщик в режиме ожидания", color.BG_RESET)
+	cmd.Waiting(animation.DOTS, color.BG_GREEN, msg, color.BG_RESET)
 
 }

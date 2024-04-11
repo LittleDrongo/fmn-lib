@@ -7,6 +7,7 @@ import (
 	"github.com/LittleDrongo/fmn-lib/planner"
 
 	"github.com/LittleDrongo/fmn-lib/console/cmd"
+	"github.com/LittleDrongo/fmn-lib/console/cmd/animation"
 	"github.com/LittleDrongo/fmn-lib/console/cmd/loading"
 	"github.com/LittleDrongo/fmn-lib/console/color"
 )
@@ -18,11 +19,14 @@ func main() {
 func timerSample() {
 	fmt.Println()
 
+	cmd.Waiting(animation.CLOCK_COLOR, "dsadas")
+
 	fmt.Println(color.BG_BLUE, "      Автозапуск через 10 секунд       ", color.BG_RESET)
 
 	fmt.Println(color.DBOLD, "Нажмите Enter чтобы прервать автозапуск", color.RESET)
 	fmt.Println()
-	cmd.Timer(loading.BAR, 5, func() { stopedCode() }, func() { cronSample() })
+	cmd.Autorun(loading.BAR, 5, func() { stopedCode() }, func() { cronSample() })
+
 }
 
 func stopedCode() {
@@ -67,6 +71,6 @@ func cronSample() {
 	},
 		"Тестовый метод2")
 
-	cron.Run()
+	cron.Run("Планировщик в режиме ожидания")
 
 }

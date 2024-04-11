@@ -5,7 +5,7 @@ import (
 	"time"
 )
 
-func Timer(loading []string, second int, codeIfPressedEnter func(), codeIfTimeLast func()) {
+func Autorun(loading []string, second int, codeIfPressedEnter func(), codeIfTimeLast func()) {
 
 	enterPressed := make(chan bool)
 
