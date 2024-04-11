@@ -12,20 +12,28 @@ import (
 )
 
 func main() {
-
-	res := cmd.Password("Password please: ")
-	fmt.Println(res)
-	fmt.Println()
-
-	cmd.TimeoutRun(loading.BAR, 1, func() {
-		someCronLogin()
-	}, color.BG_RED, "Автозапуск:", color.BG_RESET)
+	timerSample()
 }
 
-func someCronLogin() {
+func timerSample() {
+	fmt.Println()
+
+	fmt.Println(color.BG_BLUE, "      Автозапуск через 10 секунд       ", color.BG_RESET)
+
+	fmt.Println(color.DBOLD, "Нажмите Enter чтобы прервать автозапуск", color.RESET)
+	fmt.Println()
+	cmd.Timer(loading.BAR, 5, func() { stopedCode() }, func() { cronSample() })
+}
+
+func stopedCode() {
 
 	fmt.Println()
-	fmt.Print(color.BG_RED, " </> ", color.RESET, color.BG_BLACK, " Тестовое приложение", color.DBOLD, " v.0.0 ", color.RESET)
+	fmt.Println("Атозапуск прерван")
+
+}
+
+func cronSample() {
+
 	fmt.Println()
 	cron := planner.CreateNewTasklist()
 

@@ -30,7 +30,7 @@ func CreateNewTasklist() TaskList {
 
 /*Создать добавить задачу в планировщик задач*/
 func (crn *TaskList) AddTaskCron(args CronRunArguments, code func(), description ...string) {
-	fmt.Println(color.BG_GREEN, " Cron ", color.BG_PURPLE, description, color.RESET, args)
+	fmt.Println(description, args)
 	crn.AddFunc(args.Second+" "+args.Minute+" "+args.Hour+" "+args.DayOfMount+" "+args.Mount+" "+args.DayOfWeek, code)
 }
 
