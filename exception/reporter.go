@@ -1,4 +1,4 @@
-package errors
+package exception
 
 type Reporter interface {
 	Report(error, ...interface{})

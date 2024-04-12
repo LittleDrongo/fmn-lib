@@ -1,4 +1,4 @@
-package errors
+package exception
 
 import "log"
 
@@ -26,4 +26,11 @@ func Fatalln(err error, message ...interface{}) {
 	if err != nil {
 		log.Fatalln(message, err)
 	}
+}
+
+func DropUp(err error) error {
+	if err != nil {
+		return err
+	}
+	return nil
 }

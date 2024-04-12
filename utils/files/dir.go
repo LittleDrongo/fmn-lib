@@ -4,7 +4,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/LittleDrongo/fmn-lib/errors"
+	"github.com/LittleDrongo/fmn-lib/exception"
 )
 
 func MakeDirIfIsNotExist(path string) {
@@ -13,7 +13,7 @@ func MakeDirIfIsNotExist(path string) {
 
 	if _, err := os.Stat(dir); os.IsNotExist(err) {
 		err := os.MkdirAll(dir, 0755)
-		errors.Println(err, "Ошибка при создании папки:")
+		exception.Println(err, "Ошибка при создании папки:")
 	}
 
 }

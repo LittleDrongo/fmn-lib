@@ -7,7 +7,6 @@ import (
 	"github.com/LittleDrongo/fmn-lib/planner"
 
 	"github.com/LittleDrongo/fmn-lib/console/cmd"
-	"github.com/LittleDrongo/fmn-lib/console/cmd/animation"
 	"github.com/LittleDrongo/fmn-lib/console/cmd/loading"
 	"github.com/LittleDrongo/fmn-lib/console/color"
 )
@@ -18,8 +17,6 @@ func main() {
 
 func timerSample() {
 	fmt.Println()
-
-	cmd.Waiting(animation.CLOCK_COLOR, "dsadas")
 
 	fmt.Println(color.BG_BLUE, "      Автозапуск через 10 секунд       ", color.BG_RESET)
 

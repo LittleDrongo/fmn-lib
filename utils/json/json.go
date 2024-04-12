@@ -7,7 +7,7 @@ import (
 
 	"github.com/LittleDrongo/fmn-lib/utils/files"
 
-	"github.com/LittleDrongo/fmn-lib/errors"
+	"github.com/LittleDrongo/fmn-lib/exception"
 )
 
 type Writer interface {
@@ -19,14 +19,14 @@ func Write(data interface{}, filepath string) {
 	files.MakeDirIfIsNotExist(filepath)
 
 	file, err := json.MarshalIndent(data, "", "	")
-	errors.Println(err, "Ошибка при создании объекта данных JSON")
+	exception.Println(err, "Ошибка при создании объекта данных JSON")
 
 	err = os.WriteFile(filepath, file, 0644)
-	errors.Println(err, "Ошибка сохранения файла JSON")
+	exception.Println(err, "Ошибка сохранения файла JSON")
 }
 
 func Print(data interface{}) {
 	jsonData, err := json.MarshalIndent(data, "", "    ")
-	errors.Fatalln(err, "Ошибка при создании объекта данных JSON:")
+	exception.Fatalln(err, "Ошибка при создании объекта данных JSON:")
 	fmt.Println(string(jsonData))
 }
