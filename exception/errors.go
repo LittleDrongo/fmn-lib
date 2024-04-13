@@ -27,10 +27,3 @@ func Fatalln(err error, message ...interface{}) {
 		log.Fatalln(message, err)
 	}
 }
-
-func DropUp(err error) error {
-	if err != nil {
-		return err
-	}
-	return nil
-}
