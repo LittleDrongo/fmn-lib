@@ -12,7 +12,11 @@ import (
 )
 
 func main() {
-	timerSample()
+
+	// Примеры записей в лог
+	log.Println("Это сообщение будет записано в файл")
+	log.Println(color.BG_RED, "Test", color.RESET)
+	log.Printf("Это еще одно сообщение: %s", "привет")
 }
 
 func timerSample() {

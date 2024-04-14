@@ -1,6 +1,8 @@
 package exception
 
-import "log"
+import (
+	"log"
+)
 
 func Print(err error, message ...interface{}) {
 	if err != nil {
