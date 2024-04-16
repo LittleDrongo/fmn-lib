@@ -3,20 +3,62 @@ package main
 import (
 	"fmt"
 	"log"
+	"time"
 
 	"github.com/LittleDrongo/fmn-lib/planner"
+	"github.com/LittleDrongo/fmn-lib/utils/jsn"
 
 	"github.com/LittleDrongo/fmn-lib/console/cmd"
 	"github.com/LittleDrongo/fmn-lib/console/cmd/loading"
 	"github.com/LittleDrongo/fmn-lib/console/color"
 )
 
-func main() {
+type mySettingsTestTest struct {
+	Ms myStructTestTest
+	Me myEmployTestTest
+}
 
-	// Примеры записей в лог
-	log.Println("Это сообщение будет записано в файл")
-	log.Println(color.BG_RED, "Test", color.RESET)
-	log.Printf("Это еще одно сообщение: %s", "привет")
+type myStructTestTest struct {
+	Date  time.Time
+	Coast float64
+}
+
+type myEmployTestTest struct {
+	Name string
+	Age  int
+	Done bool
+}
+
+func main() {
+	jsonExportSample()
+	jsonImportSample()
+}
+
+func jsonExportSample() {
+
+	mySet := mySettingsTestTest{
+		Ms: myStructTestTest{
+			Date:  time.Now(),
+			Coast: 53.4343,
+		},
+
+		Me: myEmployTestTest{
+			Name: "Alexey",
+			Age:  35,
+			Done: true,
+		},
+	}
+
+	jsn.Export(mySet, "export_settings.json")
+	jsn.Print(mySet)
+}
+
+func jsonImportSample() {
+
+	var settingsFromFile mySettingsTestTest
+	_ = jsn.Import("import_settings.json", &settingsFromFile)
+	fmt.Printf("type is: %T\n", settingsFromFile)
+
 }
 
 func timerSample() {
