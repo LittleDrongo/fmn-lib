@@ -30,6 +30,7 @@ type myEmployTestTest struct {
 }
 
 func main() {
+
 	jsonExportSample()
 	jsonImportSample()
 }
