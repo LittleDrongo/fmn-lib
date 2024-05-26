@@ -15,7 +15,6 @@ func CreateFileIfIsnotExist(filepath string) (*os.File, error) {
 
 	file, err := os.Create(filepath)
 	if err != nil {
-		fmt.Println("Ошибка при создании файла:", err)
 		return nil, fmt.Errorf("ошибка при создании файла: %v", err)
 	}
 
