@@ -3,13 +3,12 @@ package main
 import (
 	"fmt"
 	"log"
-	"os/exec"
 	"time"
 
 	"github.com/LittleDrongo/fmn-lib/planner"
 	"github.com/LittleDrongo/fmn-lib/secret"
 	"github.com/LittleDrongo/fmn-lib/utils/jsn"
-	"github.com/LittleDrongo/fmn-lib/utils/yamlt"
+	"github.com/LittleDrongo/fmn-lib/utils/yam"
 
 	"github.com/LittleDrongo/fmn-lib/console/cmd"
 	"github.com/LittleDrongo/fmn-lib/console/cmd/loading"
@@ -36,29 +35,40 @@ type myEmployTestTest struct {
 type loginPassword struct {
 	Login    string
 	Password string
+	Admin    bool
+	Age      int
+	Sum      float64
+	Banned   bool
 }
 
 const KEY = "1234567890123456"
 
 func main() {
 
-	var lp loginPassword
-	yamlt.Import("myoutpot.yaml", &lp)
-	yamlt.Print(lp)
+	mySet := mySettingsTestTest{
+		Ms: myStructTestTest{
+			Date:  time.Now(),
+			Coast: 53.4343,
+		},
 
-	pass, _ := secret.Decrypt(KEY, lp.Password)
-
-	if pass == "5221696" {
-		fmt.Println("Правильно")
-	} else {
-		fmt.Println("Ошибка")
+		Me: myEmployTestTest{
+			Name: "Alexey",
+			Age:  35,
+			Done: true,
+		},
 	}
 
-}
+	yam.ColorPrint(mySet)
 
-func setEnvVariableWindows(name, value string) error {
-	cmd := exec.Command("setx", name, value)
-	return cmd.Run()
+	yam.ColorPrint(loginPassword{
+		Login:    "mylogin",
+		Password: "y12345",
+		Admin:    false,
+		Banned:   true,
+		Age:      53,
+		Sum:      321.6454,
+	})
+
 }
 
 func secretSample() {
@@ -97,7 +107,7 @@ func yamlExportSample() {
 		},
 	}
 
-	yamlt.Export(mySet, "data/myfile.yaml")
+	yam.Export(mySet, "data/myfile.yaml")
 
 }
 
@@ -105,8 +115,8 @@ func yamlImportAndPrintSample() {
 
 	var mySetTwo mySettingsTestTest
 
-	yamlt.Import("data/myfile.yaml", &mySetTwo)
-	yamlt.Print(mySetTwo)
+	yam.Import("data/myfile.yaml", &mySetTwo)
+	yam.Print(mySetTwo)
 
 }
 

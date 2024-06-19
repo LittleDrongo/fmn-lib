@@ -1,44 +1,45 @@
-package jsn
+package yam
 
 import (
 	"bytes"
-	"encoding/json"
 	"fmt"
 	"os"
 
 	"github.com/LittleDrongo/fmn-lib/exception"
 	"github.com/LittleDrongo/fmn-lib/utils/files"
 	"github.com/alecthomas/chroma/quick"
+	"gopkg.in/yaml.v2"
 )
 
+// Метод экспортирует любую структуру в формате YAML файла.
 func Export(data interface{}, filepath string) error {
-
 	files.MakeDirIfIsNotExist(filepath)
 
-	file, err := json.MarshalIndent(data, "", "	")
+	file, err := yaml.Marshal(data)
 	if err != nil {
-		return exception.DropUp(err, "Ошибка при создании объекта данных JSON:")
+		return exception.DropUp(err, "Ошибка при создании объекта данных YAML:")
 	}
 
 	err = os.WriteFile(filepath, file, 0644)
 	if err != nil {
-		return exception.DropUp(err, "Ошибка сохранения файла JSON:")
+		return exception.DropUp(err, "Ошибка сохранения файла YAML:")
 	}
 
 	return nil
 }
 
+// Метод печатать любую структуру в формате YAML файла.
 func Print(data interface{}) error {
-	jsonData, err := json.MarshalIndent(data, "", "	")
+	yamlData, err := yaml.Marshal(data)
 	if err != nil {
-		return exception.DropUp(err, "Ошибка при создании объекта данных JSON:")
+		return exception.DropUp(err, "ошибка при создании объекта данных YAML:")
 	}
-	fmt.Println(string(jsonData))
+	fmt.Println(string(yamlData))
 	return nil
 }
 
 /*
-Метод печает в формате JSON соблюдая подстветку синтаксиса.
+Метод печает в формате YAML соблюдая подстветку синтаксиса.
 
 Полный список доступных стилей:
 
@@ -50,7 +51,7 @@ func ColorPrint(data interface{}, style ...string) error {
 	if len(style) > 0 {
 		theme = style[0]
 	} else {
-		theme = "igor"
+		theme = "colorful"
 	}
 
 	str, err := ToString(data)
@@ -59,7 +60,7 @@ func ColorPrint(data interface{}, style ...string) error {
 	}
 
 	var buf bytes.Buffer
-	err = quick.Highlight(&buf, str, "json", "terminal", theme)
+	err = quick.Highlight(&buf, str, "yaml", "terminal", theme)
 	if err != nil {
 		return err
 	}
@@ -70,24 +71,23 @@ func ColorPrint(data interface{}, style ...string) error {
 }
 
 func ToString(data interface{}) (string, error) {
-	jsonData, err := json.MarshalIndent(data, "", "\t")
+	yamlData, err := yaml.Marshal(data)
 	if err != nil {
-		return "", fmt.Errorf("ошибка при создании объекта данных JSON: %v", err)
+		return "", fmt.Errorf("ошибка при создании объекта данных YAML: %v", err)
 	}
-	return string(jsonData), nil
+	return string(yamlData), nil
 }
 
 // 1. Сначала создаётся экземпляр класса который будет заполняться: var myStrc MySturct
 //
 // 2. В аргументах Import("filepath", &myStrc) передаётся указатель переменной для заполнения данными из файла
 func Import(filepath string, anyTypePointer interface{}) error {
-
 	file, err := os.ReadFile(filepath)
 	if err != nil {
 		return err
 	}
 
-	err = json.Unmarshal(file, &anyTypePointer)
+	err = yaml.Unmarshal(file, anyTypePointer)
 	if err != nil {
 		return err
 	}
