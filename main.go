@@ -7,6 +7,7 @@ import (
 
 	"github.com/LittleDrongo/fmn-lib/planner"
 	"github.com/LittleDrongo/fmn-lib/utils/jsn"
+	"github.com/LittleDrongo/fmn-lib/utils/yat"
 
 	"github.com/LittleDrongo/fmn-lib/console/cmd"
 	"github.com/LittleDrongo/fmn-lib/console/cmd/loading"
@@ -31,8 +32,38 @@ type myEmployTestTest struct {
 
 func main() {
 
-	jsonExportSample()
-	jsonImportSample()
+	// jsonExportSample()
+	// jsonImportSample()
+	yamlExportSample()
+	yamlImportAndPrintSample()
+}
+
+func yamlExportSample() {
+
+	mySet := mySettingsTestTest{
+		Ms: myStructTestTest{
+			Date:  time.Now(),
+			Coast: 53.4343,
+		},
+
+		Me: myEmployTestTest{
+			Name: "Alexey",
+			Age:  35,
+			Done: true,
+		},
+	}
+
+	yat.Export(mySet, "data/myfile.yaml")
+
+}
+
+func yamlImportAndPrintSample() {
+
+	var mySetTwo mySettingsTestTest
+
+	yat.Import("data/myfile.yaml", &mySetTwo)
+	yat.Print(mySetTwo)
+
 }
 
 func jsonExportSample() {
