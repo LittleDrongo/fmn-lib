@@ -3,11 +3,13 @@ package main
 import (
 	"fmt"
 	"log"
+	"os/exec"
 	"time"
 
 	"github.com/LittleDrongo/fmn-lib/planner"
+	"github.com/LittleDrongo/fmn-lib/secret"
 	"github.com/LittleDrongo/fmn-lib/utils/jsn"
-	"github.com/LittleDrongo/fmn-lib/utils/yat"
+	"github.com/LittleDrongo/fmn-lib/utils/yamlt"
 
 	"github.com/LittleDrongo/fmn-lib/console/cmd"
 	"github.com/LittleDrongo/fmn-lib/console/cmd/loading"
@@ -20,8 +22,9 @@ type mySettingsTestTest struct {
 }
 
 type myStructTestTest struct {
-	Date  time.Time
-	Coast float64
+	Date       time.Time
+	Coast      float64
+	otherField float64
 }
 
 type myEmployTestTest struct {
@@ -30,12 +33,53 @@ type myEmployTestTest struct {
 	Done bool
 }
 
+type loginPassword struct {
+	Login    string
+	Password string
+}
+
+const KEY = "1234567890123456"
+
 func main() {
 
-	// jsonExportSample()
-	// jsonImportSample()
-	yamlExportSample()
-	yamlImportAndPrintSample()
+	var lp loginPassword
+	yamlt.Import("myoutpot.yaml", &lp)
+	yamlt.Print(lp)
+
+	pass, _ := secret.Decrypt(KEY, lp.Password)
+
+	if pass == "5221696" {
+		fmt.Println("Правильно")
+	} else {
+		fmt.Println("Ошибка")
+	}
+
+}
+
+func setEnvVariableWindows(name, value string) error {
+	cmd := exec.Command("setx", name, value)
+	return cmd.Run()
+}
+
+func secretSample() {
+	key := "examplekey123456" // 16, 24 или 32 байта длина ключа для AES-128, AES-192 и AES-256 соответственно
+	plaintext := cmd.Password("Введите ваш секрет: ")
+
+	encrypted, err := secret.Encrypt(key, plaintext)
+	if err != nil {
+		fmt.Println("Ошибка при шифровании:", err)
+		return
+	}
+
+	fmt.Println("Зашифрованный текст:", encrypted)
+
+	decrypted, err := secret.Decrypt(key, encrypted)
+	if err != nil {
+		fmt.Println("Ошибка при расшифровке:", err)
+		return
+	}
+
+	fmt.Println("Расшифрованный текст:", decrypted)
 }
 
 func yamlExportSample() {
@@ -53,7 +97,7 @@ func yamlExportSample() {
 		},
 	}
 
-	yat.Export(mySet, "data/myfile.yaml")
+	yamlt.Export(mySet, "data/myfile.yaml")
 
 }
 
@@ -61,8 +105,8 @@ func yamlImportAndPrintSample() {
 
 	var mySetTwo mySettingsTestTest
 
-	yat.Import("data/myfile.yaml", &mySetTwo)
-	yat.Print(mySetTwo)
+	yamlt.Import("data/myfile.yaml", &mySetTwo)
+	yamlt.Print(mySetTwo)
 
 }
 

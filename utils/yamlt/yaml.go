@@ -1,4 +1,4 @@
-package yat
+package yamlt
 
 import (
 	"fmt"
@@ -15,12 +15,12 @@ func Export(data interface{}, filepath string) error {
 
 	file, err := yaml.Marshal(data)
 	if err != nil {
-		return exception.DropUp(err, "ошибка при создании объекта данных YAML:")
+		return exception.DropUp(err, "Ошибка при создании объекта данных YAML:")
 	}
 
 	err = os.WriteFile(filepath, file, 0644)
 	if err != nil {
-		return exception.DropUp(err, "ошибка сохранения файла YAML:")
+		return exception.DropUp(err, "Ошибка сохранения файла YAML:")
 	}
 
 	return nil
