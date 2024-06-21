@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"log"
+	"os"
 	"time"
 
 	"github.com/LittleDrongo/fmn-lib/planner"
@@ -41,33 +42,68 @@ type loginPassword struct {
 	Banned   bool
 }
 
-const KEY = "1234567890123456"
-
 func main() {
 
-	mySet := mySettingsTestTest{
-		Ms: myStructTestTest{
-			Date:  time.Now(),
-			Coast: 53.4343,
-		},
+	// var char rune
 
-		Me: myEmployTestTest{
-			Name: "Alexey",
-			Age:  35,
-			Done: true,
-		},
+	var flag bool = true
+
+	for flag {
+
+		fmt.Println(color.BG_CYAN, " Выберите действие ", color.BG_RESET)
+		fmt.Println()
+		fmt.Println(color.BG_CYAN, " 1 ", color.BG_RESET, "Запустить приложение")
+		fmt.Println(color.BG_CYAN, " 2 ", color.BG_RESET, "Посмотреть")
+		fmt.Println(color.BG_CYAN, " 0 ", color.BG_RESET, "Выйти")
+
+		char := cmd.PressKey()
+		// char := cmd.Rune("Введите символ: ")
+		fmt.Println(string(char))
+
+		switch char {
+		case '1':
+			fmt.Println("Запускаем приложение")
+			flag = false
+		case '2':
+			fmt.Println("Смотрим")
+			flag = false
+		case '0':
+			fmt.Println("Выход")
+			os.Exit(1)
+		default:
+			fmt.Println("Неверное действие")
+			fmt.Println("Вы нажали", string(char))
+		}
+
 	}
 
-	yam.ColorPrint(mySet)
+}
 
-	yam.ColorPrint(loginPassword{
+func colorJSONandYAMLSample() {
+
+	const key = "1234567890123456"
+
+	pass, _ := secret.Encrypt(key, cmd.Password("Введите пароль: "))
+
+	settings := loginPassword{
 		Login:    "mylogin",
-		Password: "y12345",
+		Password: pass,
 		Admin:    false,
 		Banned:   true,
 		Age:      53,
 		Sum:      321.6454,
-	})
+	}
+
+	jsn.Export(settings, "settings.json")
+	yam.Export(settings, "settings.yaml")
+
+	unkpass, _ := secret.Decrypt(key, settings.Password)
+
+	if cmd.Password("Введите пароль: ") == unkpass {
+		fmt.Println("Да, всё хорошо")
+	}
+
+	yam.ColorPrint(settings)
 
 }
 
