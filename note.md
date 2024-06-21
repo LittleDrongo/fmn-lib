@@ -1,1 +1,1 @@
-git add *;git commit -am "v1.0.26";git tag v1.0.26;git push origin v1.0.26;git push
+git add *;git commit -am "v1.0.27";git tag v1.0.27;git push origin v1.0.27;git push

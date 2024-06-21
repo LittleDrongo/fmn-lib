@@ -43,9 +43,6 @@ type loginPassword struct {
 }
 
 func main() {
-
-	// var char rune
-
 	var flag bool = true
 
 	for flag {
