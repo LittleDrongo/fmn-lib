@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"log"
-	"os"
 	"time"
 
 	"github.com/LittleDrongo/fmn-lib/planner"
@@ -14,6 +13,7 @@ import (
 	"github.com/LittleDrongo/fmn-lib/console/cmd"
 	"github.com/LittleDrongo/fmn-lib/console/cmd/loading"
 	"github.com/LittleDrongo/fmn-lib/console/color"
+	_ "github.com/mattn/go-sqlite3"
 )
 
 type mySettingsTestTest struct {
@@ -43,37 +43,6 @@ type loginPassword struct {
 }
 
 func main() {
-
-	var flag bool = true
-
-	for flag {
-
-		fmt.Println(color.BG_CYAN, " Выберите действие ", color.BG_RESET)
-		fmt.Println()
-		fmt.Println(color.BG_CYAN, " 1 ", color.BG_RESET, "Запустить приложение")
-		fmt.Println(color.BG_CYAN, " 2 ", color.BG_RESET, "Посмотреть")
-		fmt.Println(color.BG_CYAN, " 0 ", color.BG_RESET, "Выйти")
-
-		char := cmd.PressKey()
-		// char := cmd.Rune("Введите символ: ")
-		fmt.Println(string(char))
-
-		switch char {
-		case '1':
-			fmt.Println("Запускаем приложение")
-			flag = false
-		case '2':
-			fmt.Println("Смотрим")
-			flag = false
-		case '0':
-			fmt.Println("Выход")
-			os.Exit(1)
-		default:
-			fmt.Println("Неверное действие")
-			fmt.Println("Вы нажали", string(char))
-		}
-
-	}
 
 }
 

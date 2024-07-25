@@ -11,5 +11,6 @@ require (
 
 require (
 	github.com/dlclark/regexp2 v1.4.0 // indirect
+	github.com/mattn/go-sqlite3 v1.14.22 // indirect
 	golang.org/x/sys v0.19.0 // indirect
 )
