@@ -74,20 +74,16 @@ func GetRandomKey(length int) (string, error) {
 
 // Преобразует ключ произвольной длины в ключ длиной 256 бит (32 байта) с помощью SHA-256
 func ConvertToAES256Key(key string) (string, error) {
-	// Преобразуем ключ в байтовый массив
 	keyBytes := []byte(key)
 
-	// Создаем новый хеш SHA-256
 	hasher := sha256.New()
 	_, err := hasher.Write(keyBytes)
 	if err != nil {
 		return "", err
 	}
 
-	// Получаем сумму (хеш) и преобразуем её в строку в шестнадцатеричном формате
 	hashedKey := hasher.Sum(nil)
 	hashedKeyStr := hex.EncodeToString(hashedKey)
 
-	// Возвращаем только первые 32 байта (256 бит) хеша в виде строки
 	return hashedKeyStr[:32], nil
 }

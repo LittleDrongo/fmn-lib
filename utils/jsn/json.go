@@ -77,9 +77,12 @@ func ToString(data interface{}) (string, error) {
 	return string(jsonData), nil
 }
 
-// 1. Сначала создаётся экземпляр класса который будет заполняться: var myStrc MySturct
-//
-// 2. В аргументах Import("filepath", &myStrc) передаётся указатель переменной для заполнения данными из файла
+/*
+Сначала создаётся экземпляр класса который будет заполняться
+
+	var myStrc myStruct
+	jsn.Import("data/file.json", &myStrc)
+*/
 func Import(filepath string, anyTypePointer interface{}) error {
 
 	file, err := os.ReadFile(filepath)

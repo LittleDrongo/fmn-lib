@@ -22,19 +22,21 @@ func sample() {
 		MyStructs map[string]MyStruct
 	}
 
-	repo := Repository{
-		MyStructs: make(map[string]MyStruct),
-	}
+	// repo := Repository{
+	// 	MyStructs: make(map[string]MyStruct),
+	// }
+
+	repo := make(map[string]MyStruct)
 
 	// Импорт данных из CSV
-	err := ImportMapFromCSV("data.csv", &repo.MyStructs)
+	err := ImportMapFromCSV("data.csv", &repo)
 	if err != nil {
 		fmt.Println("Error importing CSV:", err)
 		return
 	}
 
 	// Дополняем данные
-	repo.MyStructs["800"] = MyStruct{
+	repo["800"] = MyStruct{
 		Id:           "800",
 		FieldString:  "str3",
 		FieldFloat64: 64.4,
@@ -42,12 +44,12 @@ func sample() {
 		FieldTime:    time.Now(),
 	}
 
-	for key, value := range repo.MyStructs {
+	for key, value := range repo {
 		fmt.Printf("Key: %s, Value: %+v\n", key, value)
 	}
 
 	// Экспорт данных в CSV
-	err = ExportMapToCSV("data.csv", repo.MyStructs)
+	err = ExportMapToCSV("data.csv", repo)
 	if err != nil {
 		fmt.Println("Error exporting CSV:", err)
 		return
@@ -56,6 +58,12 @@ func sample() {
 	fmt.Println("CSV import/export completed successfully")
 }
 
+/*
+Сначала создаётся map который будет заполняться
+
+	repo := make(map[string]MyStruct)
+	err := ImportMapFromCSV("data.csv", &repo)
+*/
 func ImportMapFromCSV(filePath string, data interface{}) error {
 
 	if _, err := os.Stat(filePath); os.IsNotExist(err) {

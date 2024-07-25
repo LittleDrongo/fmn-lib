@@ -16,10 +16,11 @@ func Export(data interface{}, filepath string) error {
 }
 
 /*
-Пример импорта файла
-var myobj someStruct{}
+/*
+Сначала создаётся экземпляр класса который будет заполняться
 
-gobs.Import("file.gob", &data)
+	var myStrc myStruct
+	gobs.Import("data/file.job", &myStrc)
 */
 func Import(filepath string, data interface{}) error {
 	file, err := os.Open(filepath)
