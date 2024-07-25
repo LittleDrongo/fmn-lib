@@ -13,7 +13,6 @@ import (
 	"github.com/LittleDrongo/fmn-lib/console/cmd"
 	"github.com/LittleDrongo/fmn-lib/console/cmd/loading"
 	"github.com/LittleDrongo/fmn-lib/console/color"
-	_ "github.com/mattn/go-sqlite3"
 )
 
 type mySettingsTestTest struct {
