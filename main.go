@@ -43,6 +43,8 @@ type loginPassword struct {
 
 func main() {
 
+	cronSample()
+
 }
 
 func colorJSONandYAMLSample() {
