@@ -97,3 +97,20 @@ func Import(filepath string, anyTypePointer interface{}) error {
 
 	return nil
 }
+
+func ImportStruct[S any](filepath string) (S, error) {
+	var result S
+	err := Import(filepath, &result)
+	if err != nil {
+		return result, err
+	}
+	return result, nil
+}
+
+func ExportStruct[S any](data S, filepath string) error {
+	err := Export(data, filepath)
+	if err != nil {
+		return err
+	}
+	return nil
+}
