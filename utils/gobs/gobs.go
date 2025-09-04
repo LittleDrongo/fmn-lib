@@ -5,7 +5,7 @@ import (
 	"os"
 )
 
-func Export(data interface{}, filepath string) error {
+func Export(data any, filepath string) error {
 	file, err := os.Create(filepath)
 	if err != nil {
 		return err
@@ -16,13 +16,12 @@ func Export(data interface{}, filepath string) error {
 }
 
 /*
-/*
 Сначала создаётся экземпляр класса который будет заполняться
 
 	var myStrc myStruct
 	gobs.Import("data/file.job", &myStrc)
 */
-func Import(filepath string, data interface{}) error {
+func Import(filepath string, data any) error {
 	file, err := os.Open(filepath)
 	if err != nil {
 		return err

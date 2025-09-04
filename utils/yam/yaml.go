@@ -5,34 +5,33 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/LittleDrongo/fmn-lib/exception"
 	"github.com/LittleDrongo/fmn-lib/utils/files"
 	"github.com/alecthomas/chroma/quick"
 	"gopkg.in/yaml.v2"
 )
 
 // Метод экспортирует любую структуру в формате YAML файла.
-func Export(data interface{}, filepath string) error {
+func Export(data any, filepath string) error {
 	files.MakeDirIfIsNotExist(filepath)
 
 	file, err := yaml.Marshal(data)
 	if err != nil {
-		return exception.DropUp(err, "Ошибка при создании объекта данных YAML:")
+		return fmt.Errorf("ошибка при создании объекта данных YAML: %v", err)
 	}
 
 	err = os.WriteFile(filepath, file, 0644)
 	if err != nil {
-		return exception.DropUp(err, "Ошибка сохранения файла YAML:")
+		return fmt.Errorf("ошибка при сохранения файла YAML: %v", err)
 	}
 
 	return nil
 }
 
 // Метод печатать любую структуру в формате YAML файла.
-func Print(data interface{}) error {
+func Print(data any) error {
 	yamlData, err := yaml.Marshal(data)
 	if err != nil {
-		return exception.DropUp(err, "ошибка при создании объекта данных YAML:")
+		return fmt.Errorf("ошибка при создании объекта данных YAML: %v", err)
 	}
 	fmt.Println(string(yamlData))
 	return nil
@@ -45,7 +44,7 @@ func Print(data interface{}) error {
 
 abap, algol, algol_nu, arduino, autumn, average, base16-snazzy, borland, bw, catppuccin-frappe, catppuccin-latte, catppuccin-macchiato, catppuccin-mocha, colorful, doom-one, doom-one2, dracula, emacs, evergarden, friendly, fruity, github-dark, github, gruvbox-light,  gruvbox, hr_high_contrast, hrdark, igor, lovelace, manni, modus-operandi, modus-vivendi, monokai, monokailight, murphy, native, nord, onedark, onesenterprise, paraiso-dark, paraiso-light, pastie, perldoc, pygments, rainbow_dash, rose-pine-dawn, rose-pine-moon, rose-pine, rrt, solarized-dark, solarized-dark256, solarized-light, swapoff, tango, tokyonight-day, tokyonight-moon, tokyonight-night, tokyonight-storm, trac, vim, vs, vulcan, witchhazel, xcode-dark, xcode,
 */
-func ColorPrint(data interface{}, style ...string) error {
+func ColorPrint(data any, style ...string) error {
 
 	var theme string
 	if len(style) > 0 {
@@ -70,7 +69,7 @@ func ColorPrint(data interface{}, style ...string) error {
 
 }
 
-func ToString(data interface{}) (string, error) {
+func ToString(data any) (string, error) {
 	yamlData, err := yaml.Marshal(data)
 	if err != nil {
 		return "", fmt.Errorf("ошибка при создании объекта данных YAML: %v", err)
@@ -84,13 +83,13 @@ func ToString(data interface{}) (string, error) {
 	var myStrc myStruct
 	yam.Import("data/file.yaml", &myStrc)
 */
-func Import(filepath string, anyTypePointer interface{}) error {
+func Import(filepath string, pointer any) error {
 	file, err := os.ReadFile(filepath)
 	if err != nil {
 		return err
 	}
 
-	err = yaml.Unmarshal(file, anyTypePointer)
+	err = yaml.Unmarshal(file, pointer)
 	if err != nil {
 		return err
 	}

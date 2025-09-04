@@ -6,32 +6,34 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/LittleDrongo/fmn-lib/exception"
 	"github.com/LittleDrongo/fmn-lib/utils/files"
 	"github.com/alecthomas/chroma/quick"
 )
 
-func Export(data interface{}, filepath string) error {
+func Export(data any, filepath string) error {
 
-	files.MakeDirIfIsNotExist(filepath)
+	err := files.MakeDirIfIsNotExist(filepath)
+	if err != nil {
+		return err
+	}
 
 	file, err := json.MarshalIndent(data, "", "	")
 	if err != nil {
-		return exception.DropUp(err, "Ошибка при создании объекта данных JSON:")
+		return fmt.Errorf("ошибка при создании объекта данных JSON: %v", err)
 	}
 
 	err = os.WriteFile(filepath, file, 0644)
 	if err != nil {
-		return exception.DropUp(err, "Ошибка сохранения файла JSON:")
+		return fmt.Errorf("ошибка сохранения файла JSON: %v", err)
 	}
 
 	return nil
 }
 
-func Print(data interface{}) error {
+func Print(data any) error {
 	jsonData, err := json.MarshalIndent(data, "", "	")
 	if err != nil {
-		return exception.DropUp(err, "Ошибка при создании объекта данных JSON:")
+		return fmt.Errorf("ошибка при создании объекта данных JSON: %v", err)
 	}
 	fmt.Println(string(jsonData))
 	return nil
@@ -44,7 +46,7 @@ func Print(data interface{}) error {
 
 abap, algol, algol_nu, arduino, autumn, average, base16-snazzy, borland, bw, catppuccin-frappe, catppuccin-latte, catppuccin-macchiato, catppuccin-mocha, colorful, doom-one, doom-one2, dracula, emacs, evergarden, friendly, fruity, github-dark, github, gruvbox-light,  gruvbox, hr_high_contrast, hrdark, igor, lovelace, manni, modus-operandi, modus-vivendi, monokai, monokailight, murphy, native, nord, onedark, onesenterprise, paraiso-dark, paraiso-light, pastie, perldoc, pygments, rainbow_dash, rose-pine-dawn, rose-pine-moon, rose-pine, rrt, solarized-dark, solarized-dark256, solarized-light, swapoff, tango, tokyonight-day, tokyonight-moon, tokyonight-night, tokyonight-storm, trac, vim, vs, vulcan, witchhazel, xcode-dark, xcode,
 */
-func ColorPrint(data interface{}, style ...string) error {
+func ColorPrint(data any, style ...string) error {
 
 	var theme string
 	if len(style) > 0 {
@@ -69,7 +71,7 @@ func ColorPrint(data interface{}, style ...string) error {
 
 }
 
-func ToString(data interface{}) (string, error) {
+func ToString(data any) (string, error) {
 	jsonData, err := json.MarshalIndent(data, "", "\t")
 	if err != nil {
 		return "", fmt.Errorf("ошибка при создании объекта данных JSON: %v", err)
@@ -83,7 +85,7 @@ func ToString(data interface{}) (string, error) {
 	var myStrc myStruct
 	jsn.Import("data/file.json", &myStrc)
 */
-func Import(filepath string, anyTypePointer interface{}) error {
+func Import(filepath string, anyTypePointer any) error {
 
 	file, err := os.ReadFile(filepath)
 	if err != nil {

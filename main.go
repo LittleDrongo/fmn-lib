@@ -1,20 +1,6 @@
 package main
 
-import (
-	"fmt"
-	"log"
-	"time"
-
-	"github.com/LittleDrongo/fmn-lib/planner"
-	"github.com/LittleDrongo/fmn-lib/secret"
-	"github.com/LittleDrongo/fmn-lib/utils/jsn"
-	"github.com/LittleDrongo/fmn-lib/utils/yam"
-
-	"github.com/LittleDrongo/fmn-lib/console/cmd"
-	"github.com/LittleDrongo/fmn-lib/console/cmd/loading"
-	"github.com/LittleDrongo/fmn-lib/console/color"
-)
-
+/*
 type mySettingsTestTest struct {
 	Ms myStructTestTest
 	Me myEmployTestTest
@@ -207,3 +193,4 @@ func cronSample() {
 	cron.Run("Планировщик в режиме ожидания")
 
 }
+*/
