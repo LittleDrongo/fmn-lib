@@ -3,6 +3,7 @@ package jsn
 import (
 	"bytes"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"os"
 
@@ -115,4 +116,20 @@ func ExportStruct[S any](data S, filepath string) error {
 		return err
 	}
 	return nil
+}
+
+func ImportOrCreateDefault[T any](filepath string, defaultValue T) (T, error) {
+	_, err := os.ReadFile(filepath)
+	if err != nil {
+		if errors.Is(err, os.ErrNotExist) {
+			if err := Export(defaultValue, filepath); err != nil {
+				var zero T
+				return zero, err
+			}
+			return defaultValue, nil
+		}
+		var zero T
+		return zero, err
+	}
+	return ImportStruct[T](filepath)
 }
