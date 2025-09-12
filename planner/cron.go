@@ -29,9 +29,9 @@ func CreateNewTasklist() TaskList {
 }
 
 /*Создать добавить задачу в планировщик задач*/
-func (crn *TaskList) AddTaskCron(args CronRunArguments, code func(), description ...string) {
+func (crn *TaskList) AddTaskCron(args CronRunArguments, code func(), description ...string) error {
 	fmt.Println(description, args)
-	crn.AddFunc(args.Second+" "+args.Minute+" "+args.Hour+" "+args.DayOfMount+" "+args.Mount+" "+args.DayOfWeek, code)
+	return crn.AddFunc(args.Second+" "+args.Minute+" "+args.Hour+" "+args.DayOfMount+" "+args.Mount+" "+args.DayOfWeek, code)
 }
 
 /*Запуск выполнение кода с анимацией ожидания*/
