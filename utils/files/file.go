@@ -17,12 +17,12 @@ func CreateFileIfIsnotExist(filepath string) (*os.File, error) {
 		}
 
 	} else if !os.IsNotExist(err) {
-		return nil, fmt.Errorf("ошибка при проверке существования файла: %v", err)
+		return nil, fmt.Errorf("failed to check file existence: %v", err)
 	}
 
 	file, err := os.Create(filepath)
 	if err != nil {
-		return nil, fmt.Errorf("ошибка при создании файла: %v", err)
+		return nil, fmt.Errorf("failed to create file: %v", err)
 	}
 
 	return file, nil

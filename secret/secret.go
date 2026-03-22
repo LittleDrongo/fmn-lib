@@ -11,7 +11,7 @@ import (
 	"io"
 )
 
-// Метод шифрует текст используя ключ 16, 24 или 32 байта длина ключа для AES-128, AES-192 и AES-256.
+// Encrypt encrypts text using a 16, 24, or 32 byte key for AES-128, AES-192, or AES-256.
 func Encrypt(key, plaintext string) (string, error) {
 	block, err := aes.NewCipher([]byte(key))
 	if err != nil {
@@ -32,7 +32,7 @@ func Encrypt(key, plaintext string) (string, error) {
 	return hex.EncodeToString(ciphertext), nil
 }
 
-// Метод расшифровывает зашифрованный текст используя ключ
+// Decrypt decrypts encrypted text using the provided key.
 func Decrypt(key, cryptoText string) (string, error) {
 	block, err := aes.NewCipher([]byte(key))
 	if err != nil {
@@ -63,7 +63,7 @@ func Decrypt(key, cryptoText string) (string, error) {
 	return string(plaintext), nil
 }
 
-// Генерирует случайный ключ указанной длины
+// GetRandomKey generates a random key of the specified length.
 func GetRandomKey(length int) (string, error) {
 	key := make([]byte, length)
 	if _, err := rand.Read(key); err != nil {
@@ -72,7 +72,7 @@ func GetRandomKey(length int) (string, error) {
 	return base64.StdEncoding.EncodeToString(key), nil
 }
 
-// Преобразует ключ произвольной длины в ключ длиной 256 бит (32 байта) с помощью SHA-256
+// ConvertToAES256Key converts a key of arbitrary length into a 256-bit (32-byte) key using SHA-256.
 func ConvertToAES256Key(key string) (string, error) {
 	keyBytes := []byte(key)
 

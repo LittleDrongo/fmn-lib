@@ -11,37 +11,37 @@ import (
 	"gopkg.in/yaml.v2"
 )
 
-// Метод экспортирует любую структуру в формате YAML файла.
+// Export writes any structure to a YAML file.
 func Export(data any, filepath string) error {
 	files.MakeDirIfIsNotExist(filepath)
 
 	file, err := yaml.Marshal(data)
 	if err != nil {
-		return fmt.Errorf("ошибка при создании объекта данных YAML: %v", err)
+		return fmt.Errorf("failed to marshal YAML data: %v", err)
 	}
 
 	err = os.WriteFile(filepath, file, 0644)
 	if err != nil {
-		return fmt.Errorf("ошибка при сохранения файла YAML: %v", err)
+		return fmt.Errorf("failed to write YAML file: %v", err)
 	}
 
 	return nil
 }
 
-// Метод печатать любую структуру в формате YAML файла.
+// Print outputs any structure in YAML format.
 func Print(data any) error {
 	yamlData, err := yaml.Marshal(data)
 	if err != nil {
-		return fmt.Errorf("ошибка при создании объекта данных YAML: %v", err)
+		return fmt.Errorf("failed to marshal YAML data: %v", err)
 	}
 	fmt.Println(string(yamlData))
 	return nil
 }
 
 /*
-Метод печает в формате YAML соблюдая подстветку синтаксиса.
+ColorPrint outputs YAML with syntax highlighting.
 
-Полный список доступных стилей:
+Full list of available styles:
 
 abap, algol, algol_nu, arduino, autumn, average, base16-snazzy, borland, bw, catppuccin-frappe, catppuccin-latte, catppuccin-macchiato, catppuccin-mocha, colorful, doom-one, doom-one2, dracula, emacs, evergarden, friendly, fruity, github-dark, github, gruvbox-light,  gruvbox, hr_high_contrast, hrdark, igor, lovelace, manni, modus-operandi, modus-vivendi, monokai, monokailight, murphy, native, nord, onedark, onesenterprise, paraiso-dark, paraiso-light, pastie, perldoc, pygments, rainbow_dash, rose-pine-dawn, rose-pine-moon, rose-pine, rrt, solarized-dark, solarized-dark256, solarized-light, swapoff, tango, tokyonight-day, tokyonight-moon, tokyonight-night, tokyonight-storm, trac, vim, vs, vulcan, witchhazel, xcode-dark, xcode,
 */
@@ -73,13 +73,13 @@ func ColorPrint(data any, style ...string) error {
 func ToString(data any) (string, error) {
 	yamlData, err := yaml.Marshal(data)
 	if err != nil {
-		return "", fmt.Errorf("ошибка при создании объекта данных YAML: %v", err)
+		return "", fmt.Errorf("failed to marshal YAML data: %v", err)
 	}
 	return string(yamlData), nil
 }
 
 /*
-Сначала создаётся экземпляр класса который будет заполняться
+First create an instance of the struct that will be populated.
 
 	var myStrc myStruct
 	yam.Import("data/file.yaml", &myStrc)

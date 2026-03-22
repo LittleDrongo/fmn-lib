@@ -16,7 +16,7 @@ func Export(data any, filepath string) error {
 }
 
 /*
-Сначала создаётся экземпляр класса который будет заполняться
+First create an instance of the struct that will be populated.
 
 	var myStrc myStruct
 	gobs.Import("data/file.job", &myStrc)

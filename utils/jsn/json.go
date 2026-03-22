@@ -20,12 +20,12 @@ func Export(data any, filepath string) error {
 
 	file, err := json.MarshalIndent(data, "", "	")
 	if err != nil {
-		return fmt.Errorf("ошибка при создании объекта данных JSON: %v", err)
+		return fmt.Errorf("failed to marshal JSON data: %v", err)
 	}
 
 	err = os.WriteFile(filepath, file, 0644)
 	if err != nil {
-		return fmt.Errorf("ошибка сохранения файла JSON: %v", err)
+		return fmt.Errorf("failed to write JSON file: %v", err)
 	}
 
 	return nil
@@ -34,16 +34,16 @@ func Export(data any, filepath string) error {
 func Print(data any) error {
 	jsonData, err := json.MarshalIndent(data, "", "	")
 	if err != nil {
-		return fmt.Errorf("ошибка при создании объекта данных JSON: %v", err)
+		return fmt.Errorf("failed to marshal JSON data: %v", err)
 	}
 	fmt.Println(string(jsonData))
 	return nil
 }
 
 /*
-Метод печает в формате JSON соблюдая подстветку синтаксиса.
+ColorPrint outputs JSON with syntax highlighting.
 
-Полный список доступных стилей:
+Full list of available styles:
 
 abap, algol, algol_nu, arduino, autumn, average, base16-snazzy, borland, bw, catppuccin-frappe, catppuccin-latte, catppuccin-macchiato, catppuccin-mocha, colorful, doom-one, doom-one2, dracula, emacs, evergarden, friendly, fruity, github-dark, github, gruvbox-light,  gruvbox, hr_high_contrast, hrdark, igor, lovelace, manni, modus-operandi, modus-vivendi, monokai, monokailight, murphy, native, nord, onedark, onesenterprise, paraiso-dark, paraiso-light, pastie, perldoc, pygments, rainbow_dash, rose-pine-dawn, rose-pine-moon, rose-pine, rrt, solarized-dark, solarized-dark256, solarized-light, swapoff, tango, tokyonight-day, tokyonight-moon, tokyonight-night, tokyonight-storm, trac, vim, vs, vulcan, witchhazel, xcode-dark, xcode,
 */
@@ -75,13 +75,13 @@ func ColorPrint(data any, style ...string) error {
 func ToString(data any) (string, error) {
 	jsonData, err := json.MarshalIndent(data, "", "\t")
 	if err != nil {
-		return "", fmt.Errorf("ошибка при создании объекта данных JSON: %v", err)
+		return "", fmt.Errorf("failed to marshal JSON data: %v", err)
 	}
 	return string(jsonData), nil
 }
 
 /*
-Сначала создаётся экземпляр класса который будет заполняться
+First create an instance of the struct that will be populated.
 
 	var myStrc myStruct
 	jsn.Import("data/file.json", &myStrc)

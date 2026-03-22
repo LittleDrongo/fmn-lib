@@ -35,7 +35,7 @@ func Rune(a ...any) rune {
 	reader := bufio.NewReader(os.Stdin)
 	char, _, err := reader.ReadRune()
 	if err != nil {
-		fmt.Println("Ошибка чтения:", err)
+		fmt.Println("Read error:", err)
 		return 0
 	}
 	return char
