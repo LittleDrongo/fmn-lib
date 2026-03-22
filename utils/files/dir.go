@@ -5,23 +5,12 @@ import (
 	"path/filepath"
 )
 
-func MakeDirIfIsNotExist(path string) error {
-
-	dir := filepath.Dir(path)
-
-	err := os.MkdirAll(dir, 0755)
-	if err != nil {
-		return err
-	}
-	return nil
-
+// EnsureDir creates a directory and all missing parents if needed.
+func EnsureDir(dir string) error {
+	return os.MkdirAll(dir, 0755)
 }
 
-func CreateDirIfIsNotExist(dir string) error {
-	err := os.MkdirAll(dir, 0755)
-	if err != nil {
-		return err
-	}
-	return nil
-
+// EnsureDirForFile creates the parent directory for a file path.
+func EnsureDirForFile(path string) error {
+	return EnsureDir(filepath.Dir(path))
 }

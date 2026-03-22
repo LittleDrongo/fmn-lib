@@ -1,5 +1,37 @@
 package main
 
+import (
+	"fmt"
+
+	"github.com/LittleDrongo/fmn-lib/collections/safe_map"
+)
+
+func main() {
+
+	// list := set.New[string]()
+	// list.Add("Привет")
+	// list.Add("Привет")
+	// list.Add("Привет")
+	// list.Add("Привет2")
+	// list.Add("Привет3")
+
+	// for value := range list {
+	// 	fmt.Println(value)
+	// }
+
+	m := safe_map.New[string, string]()
+	m.Set("1321", "3211")
+	m.Set("hello", "world")
+
+	for key, value := range m.Snapshot() {
+		fmt.Println(key, value)
+	}
+
+	m2 := safe_map.SafeMap[string, string]{}
+	fmt.Println(m2.Get("etst"))
+
+}
+
 /*
 type mySettingsTestTest struct {
 	Ms myStructTestTest
@@ -143,7 +175,7 @@ func timerSample() {
 	fmt.Println(color.BG_BLUE, "      Автозапуск через 10 секунд       ", color.BG_RESET)
 
 	fmt.Println(color.DBOLD, "Нажмите Enter чтобы прервать автозапуск", color.RESET)
-	fmt.Println()
+	fmt.Printlelements.
 	cmd.Autorun(loading.BAR, 5, func() { stopedCode() }, func() { cronSample() })
 
 }

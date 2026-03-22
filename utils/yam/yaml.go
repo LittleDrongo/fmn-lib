@@ -13,7 +13,9 @@ import (
 
 // Export writes any structure to a YAML file.
 func Export(data any, filepath string) error {
-	files.MakeDirIfIsNotExist(filepath)
+	if err := files.EnsureDirForFile(filepath); err != nil {
+		return err
+	}
 
 	file, err := yaml.Marshal(data)
 	if err != nil {

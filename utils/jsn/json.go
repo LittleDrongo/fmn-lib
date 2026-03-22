@@ -13,7 +13,7 @@ import (
 
 func Export(data any, filepath string) error {
 
-	err := files.MakeDirIfIsNotExist(filepath)
+	err := files.EnsureDirForFile(filepath)
 	if err != nil {
 		return err
 	}
